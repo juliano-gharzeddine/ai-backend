@@ -33,6 +33,7 @@ def predict():
     # Return the result as a JSON response
     result = 'Spam' if prediction[0] == 1 else 'Not Spam'
     
+    print(result)
     return jsonify({'prediction': result})
 
 if __name__ == '__main__':
