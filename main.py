@@ -14,7 +14,7 @@ spam_model = joblib.load('spam-detection/nb_spam_model.pkl')
 spam_cv = joblib.load('spam-detection/count_vectorizer.pkl')
 
 # Define the route for prediction
-@app.route('/api/predict', methods=['POST'])
+@app.route('/', methods=['POST'])
 def predict():
 
     data = request.get_json()
