@@ -35,5 +35,3 @@ def predict():
     
     print(result)
     return jsonify({'prediction': result})
-
-    app.run(port=5000)
