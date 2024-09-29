@@ -1,22 +1,25 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 import joblib
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Enable CORS only for the allowed domains (for browser-based requests)
+# Enable CORS
 CORS(app)
-
 
 # Load pre-trained models and CountVectorizer
 spam_model = joblib.load('spam-detection/nb_spam_model.pkl')
 spam_cv = joblib.load('spam-detection/count_vectorizer.pkl')
 
-# Define the route for prediction
-@app.route('/', methods=['POST'])
-def predict():
+# Default route redirecting to /api/predict
+@app.route('/')
+def index():
+    return redirect('/api/predict')
 
+# Define the route for prediction
+@app.route('/api/predict', methods=['POST'])
+def predict():
     data = request.get_json()
 
     if 'email' not in data:
@@ -33,8 +36,7 @@ def predict():
     # Return the result as a JSON response
     result = 'Spam' if prediction[0] == 1 else 'Not Spam'
     
-    print(result)
     return jsonify({'prediction': result})
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(host='0.0.0.0', port=5000)
