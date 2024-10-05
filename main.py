@@ -6,7 +6,7 @@ import joblib
 app = Flask(__name__)
 
 # Allow CORS only for specific origins
-CORS(app, resources={r"/api/*": {"origins": ["https://thingproxy.freeboard.io", "https://www.codewithjuliano.com"]}})
+CORS(app, resources={r"/api/*": {"origins": ["https://codewithjuliano.com", "https://www.codewithjuliano.com"]}})
 
 # Load pre-trained models and CountVectorizer
 spam_model = joblib.load('spam-detection/nb_spam_model.pkl')
